@@ -16,10 +16,16 @@ export class DomListener {
             `Method ${method} is not implemented in ${this.name || ''} C`
         )
       }
-      this.$root.on(listener, this[method].bind(this))
+      this[method] = this[method].bind(this)
+      this.$root.on(listener, this[method])
     })
   }
-  removeDOMListener() { }
+  removeDOMListener() {
+    this.listeners.forEach((listener) => {
+      const method = getMethodName(listener)
+      this.$root.off(listener, this[method])
+    })
+  }
 }
 
 function getMethodName(eventName) {
