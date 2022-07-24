@@ -19,8 +19,13 @@ export class Table extends ExcelComponent {
       const coords = $parent.getCoords()
 
       document.onmousemove = (e) => {
+        console.log('mousemove')
         const delta = e.pageX - coords.right;
-        $parent.$el.style.width = (coords.width + delta) + 'px'
+        const value = coords.width + delta
+        $parent.$el.style.width = value + 'px'
+        console.log('$parent.data.col', $parent.data.col)
+        document.querySelectorAll(`[data-col="${$parent.data.col}"]`)
+            .forEach((el) => el.style.width = value + 'px')
       }
       document.onmouseup = () => {
         document.onmousemove = null;

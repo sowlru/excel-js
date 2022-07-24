@@ -3,6 +3,9 @@ class Dom {
     this.$el = typeof selector === 'string' ?
       document.querySelector(selector) : selector
   }
+  get data() {
+    return this.$el.dataset
+  }
   html(html) {
     if (typeof html === 'string') {
       this.$el.innerHTML = html
