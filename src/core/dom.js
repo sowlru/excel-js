@@ -40,6 +40,17 @@ class Dom {
   getCoords() {
     return this.$el.getBoundingClientRect()
   }
+  findAll(selector) {
+    return this.$el.querySelectorAll(selector)
+  }
+  /*
+  *{ height: '30px', width: '42px', backgroundColor: red }
+  */
+  css(styles = {}) {
+    Object.keys(styles).forEach( (key) => {
+      this.$el.style[key] = styles[key]
+    })
+  }
 }
 
 export function $(selector) {
