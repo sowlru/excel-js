@@ -3,16 +3,25 @@ const CODES = {A: 65, Z: 90}
 function toChar(_, idx) {
   return String.fromCharCode(CODES.A + idx)
 }
-function toCol(col) {
-  return `<div class='column'>${col}</div>`
+function toCol(col, index) {
+  console.log('index', index)
+  return `
+  <div class='column' data-type="resizable" data-col="${index}">
+    ${col}
+    <div class='col-resize' data-resize="col"></div>
+  </div>
+  `
 }
-function toCell() {
-  return `<div class='cell' contenteditable></div>`
+function toCell(_, col) {
+  return `<div class='cell' contenteditable data-col="${col}"></div>`
 }
 function createRow(index, content) {
+  const resize = index ? '<div class="row-resize" data-resize="row"></div>' : ''
   return `
-  <div class='row'>
-    <div class='row-info'>${index ? index : ''}</div>
+  <div class='row' data-type="resizable">
+    <div class='row-info'>
+      ${index ? index : ''} ${resize}
+     </div>
     <div class='row-data'>${content}</div>
   </div>`
 }
