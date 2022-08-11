@@ -12,8 +12,21 @@ function toCol(col, index) {
   </div>
   `
 }
-function toCell(_, col) {
-  return `<div class='cell' contenteditable data-col="${col}"></div>`
+// function toCell(row, col) {
+//   return `
+//     <div class='cell' contenteditable
+//       data-col="${col}" data-row="${row}"></div>
+//   `
+// }
+function toCell(row) {
+  return function(_, col) {
+    return `
+      <div class='cell' contenteditable 
+        data-col="${col}" 
+        data-id="${row}:${col}"
+      ></div>
+    `
+  }
 }
 function createRow(index, content) {
   const resize = index ? '<div class="row-resize" data-resize="row"></div>' : ''
@@ -32,9 +45,13 @@ export function createTable(rowsCount = 15) {
   const header = new Array(colsCount).fill('').map(toChar).map(toCol).join('')
   rows.push(createRow(null, header))
 
-  for (let i=0; i < rowsCount; i++) {
-    const cells = new Array(colsCount).fill('').map(toCell).join('')
-    rows.push(createRow(i + 1, cells))
+  for (let row=0; row < rowsCount; row++) {
+    const cells = new Array(colsCount)
+        .fill('')
+        // .map((_, col) => toCell(row, col))
+        .map(toCell(row))
+        .join('')
+    rows.push(createRow(row + 1, cells))
   }
   return rows.join('')
 }
