@@ -12,17 +12,14 @@ function toCol(col, index) {
   </div>
   `
 }
-// function toCell(row, col) {
-//   return `
-//     <div class='cell' contenteditable
-//       data-col="${col}" data-row="${row}"></div>
-//   `
-// }
 function toCell(row) {
   return function(_, col) {
     return `
-      <div class='cell' contenteditable 
+      <div 
+        class='cell' 
+        contenteditable 
         data-col="${col}" 
+        data-type="cell" 
         data-id="${row}:${col}"
       ></div>
     `
@@ -55,3 +52,4 @@ export function createTable(rowsCount = 15) {
   }
   return rows.join('')
 }
+
