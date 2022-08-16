@@ -16,3 +16,15 @@ export function matrix($target, $current) {
     return acc
   }, [])
 }
+export function nextSelector(key, {col, row}) {
+  const MIN_VALUE = 0
+  switch (key) {
+    case 'Enter':
+    case 'ArrowDown': row + 1 < MIN_VALUE ? MIN_VALUE : row++; break
+    case 'Tab':
+    case 'ArrowRight': col + 1 < MIN_VALUE ? MIN_VALUE : col++; break
+    case 'ArrowLeft': col - 1 < MIN_VALUE ? MIN_VALUE : col--; break
+    case 'ArrowUp': row - 1 < MIN_VALUE ? MIN_VALUE : row--; break
+  }
+  return `[data-id="${row}:${col}"]`
+}
