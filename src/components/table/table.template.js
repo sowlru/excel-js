@@ -4,7 +4,6 @@ function toChar(_, idx) {
   return String.fromCharCode(CODES.A + idx)
 }
 function toCol(col, index) {
-  console.log('index', index)
   return `
   <div class='column' data-type="resizable" data-col="${index}">
     ${col}

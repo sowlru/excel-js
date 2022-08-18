@@ -3,10 +3,10 @@ export class Emitter {
     this.listeners = {}
   }
   emit(event, ...args) {
-    if (Array.isArray(this.listeners[event])) {
+    if (!Array.isArray(this.listeners[event])) {
       return false
     }
-    this.listeners[event].forEach(listener => {
+    this.listeners[event].forEach((listener) => {
       listener(...args)
     })
     return true
@@ -15,7 +15,9 @@ export class Emitter {
     this.listeners[event] = this.listeners[event] || []
     this.listeners[event].push(fn)
     return () => {
-      this.listeners[event] = this.listeners[event].filter(listener => listener !== fn)
+      this.listeners[event] = this.listeners[event].filter(
+          (listener) => listener !== fn
+      )
     }
   }
 }
