@@ -17,7 +17,8 @@ export class Table extends ExcelComponent {
     })
   }
   toHTML() {
-    return createTable()
+    console.log(this.store.getState())
+    return createTable(20, this.store.getState())
   }
   prepare() {
     this.selection = new TableSelection()
@@ -34,9 +35,9 @@ export class Table extends ExcelComponent {
       console.log('formula done')
       this.selection.current.focus()
     })
-    // this.$subscribe((state) => {
-    //   console.log('TableState', state)
-    // })
+    this.$subscribe((state) => {
+      console.log('Table.js:subscribe: state', state)
+    })
   }
   selectCell($cell) {
     this.selection.select($cell)
@@ -46,7 +47,7 @@ export class Table extends ExcelComponent {
     try {
       const data = await resizeHandler(this.$root, event)
       this.$dispatch(actions.tableResize(data))
-      console.log('Resize data', data)
+      console.log('Table.js:resizeTable: data', data)
     } catch (e) {
       console.warn('Resize error', e.message)
     }
