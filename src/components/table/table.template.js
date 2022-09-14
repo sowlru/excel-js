@@ -1,3 +1,6 @@
+import {defaultStyles} from '../../constants'
+import {camelToDashCase} from '@core/utils'
+
 const CODES = {A: 65, Z: 90}
 const DEFAULT_WIDTH = 120
 const DEFAULT_HEIGHT = 24
@@ -15,6 +18,9 @@ function toCell(state, row) {
     console.log('table.template.js:toCell:id', id)
     const width = getWidth(state.colState, col)
     const data = state.dataState[id]
+    const styles = Object.keys(defaultStyles)
+        .map((key) => `${camelToDashCase(key)}: ${defaultStyles[key]} `)
+        .join(';')
     return `
       <div 
         class='cell' 
@@ -22,7 +28,7 @@ function toCell(state, row) {
         data-col="${col}" 
         data-type="cell" 
         data-id="${id}"
-        style="width: ${width}"
+        style="${styles}; width: ${width}"
       >${data || ''}</div>
     `
   }

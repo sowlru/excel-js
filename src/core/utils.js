@@ -24,3 +24,6 @@ export function isEqual(a, b) {
   }
   return a === b
 }
+export function camelToDashCase(str) {
+  return str.replace(/[A-Z]/g, (m) => '-' + m.toLowerCase());
+}
