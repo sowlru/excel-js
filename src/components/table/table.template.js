@@ -1,5 +1,5 @@
 import {defaultStyles} from '../../constants'
-import {camelToDashCase} from '@core/utils'
+import {toInlineStyles} from '../../core/utils'
 
 const CODES = {A: 65, Z: 90}
 const DEFAULT_WIDTH = 120
@@ -15,12 +15,15 @@ function getHeiight(state, index) {
 function toCell(state, row) {
   return function(_, col) {
     const id = `${row}:${col}`
-    console.log('table.template.js:toCell:id', id)
     const width = getWidth(state.colState, col)
     const data = state.dataState[id]
-    const styles = Object.keys(defaultStyles)
-        .map((key) => `${camelToDashCase(key)}: ${defaultStyles[key]} `)
-        .join(';')
+    const styles = toInlineStyles({
+      ...defaultStyles,
+      ...state.stylesState[id],
+    })
+    // const styles = toInlineStyles(defaultStyles)
+    console.log('table.template.js: styles', styles)
+    // const styles = state.stylesState[id]
     return `
       <div 
         class='cell' 
