@@ -2,8 +2,9 @@ import {ExcelComponent} from '@core/ExcelComponent';
 import {$} from '@core/dom'
 import {createTable} from './table.template';
 import {resizeHandler} from './table.resize';
-import {isCell, shouldResize, matrix, nextSelector}
-from '@/components/table/table.functions';
+import {
+  isCell, shouldResize, matrix, nextSelector,
+} from '@/components/table/table.functions';
 import {TableSelection} from './TableSelection';
 import * as actions from '@/redux/actions.js'
 import {defaultStyles} from '../../constants';
