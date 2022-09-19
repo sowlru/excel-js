@@ -35,6 +35,7 @@ export function toInlineStyles(styles = {}) {
 export function debounce(fn, wait) {
   let timeout
   return function(...args) {
+    console.log('utils.js~debounce: args', args)
     const later = () => {
       clearTimeout(timeout)
       // eslint-disable-next-line
