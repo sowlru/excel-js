@@ -1,5 +1,5 @@
 import {$} from '@/core/dom'
-import {ActiveRoute} from './ActiveRoute'
+// import {ActiveRoute} from './ActiveRoute'
 
 export class Router {
   constructor(selector, routes) {
@@ -17,8 +17,10 @@ export class Router {
     this.changePageHandler()
   }
   changePageHandler() {
-    console.log('ActiveRoute.path', ActiveRoute.path)
-    this.$placeholder.html('<h1>' + ActiveRoute.path + '</h1>')
+    const Page = this.routes.excel
+    const page = new Page()
+    this.$placeholder.append(page.getRoot())
+    page.afterRender()
   }
   destroy() {
     window.removeEventListener('hashchange', this.changePageHandler)
