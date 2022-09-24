@@ -24,7 +24,6 @@ export class ExcelPage extends Page {
     return this.excel.getRoot()
   }
   afterRender() {
-    console.log('afterRender')
     this.excel.init()
   }
   destroy() {
