@@ -28,7 +28,7 @@ export class Router {
       this.routes.dashboard
     this.page = new Page(ActiveRoute.param)
     this.$placeholder.append(this.page.getRoot())
-    page.afterRender()
+    this.page.afterRender()
   }
   destroy() {
     window.removeEventListener('hashchange', this.changePageHandler)
