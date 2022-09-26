@@ -1,9 +1,15 @@
-export function html() {
+import {storage} from '@core/utils'
+
+export function html(key) {
+  const model = storage(key)
+  console.log('key', key)
+  console.log('model', model)
+  const id = key.split(':')[1]
   return `
-    <li class="db__record"><a href="#">
-      Таблица #1</a>
+    <li class="db__record">
+      <a href="#excel/${id}">${model.title}</a>
       <strong>12.12.2012</strong>
-    </li>  
+    </li>
   `
 }
 function getAllKeys() {
