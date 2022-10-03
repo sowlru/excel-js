@@ -11,12 +11,7 @@ const isDev = !isProd
 const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`
 
 const jsLoaders = () => {
-  const loaders = [
-    {
-      loader: 'babel-loader',
-      options: { presets: ['@babel/preset-env'] }
-    }
-  ]
+  const loaders = ['babel-loader']
   if (isDev) { loaders.push('eslint-loader') }
   return loaders
 }
@@ -29,8 +24,8 @@ module.exports = {
   resolve: { extensions: ['.js'], alias: { '@': path.resolve(__dirname, 'src'), '@core': path.resolve(__dirname, 'src/core') }},
   devtool: isDev ? 'source-map' : false,
   devServer: { port:4200, hot:isDev },
-  plugins: [ 
-    new CleanWebpackPlugin(), 
+  plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template:'index.html', minify: { removeComments:isProd, collapseWhitespace:isProd } }),
     new CopyPlugin({ patterns: [{ from: path.resolve(__dirname, 'src/favicon.ico'), to: path.resolve(__dirname, 'dist') }] }),
     new MiniCssExtractPlugin({ filename: filename('css')}),
