@@ -6,7 +6,8 @@
 @import "formula";
 @import "table";
 @import "dashboard";
- 
+@import "loader";
+
 * {
   margin: 0;
   padding: 0;
@@ -18,10 +19,10 @@ body {
   font-size: 12px;
 }
 
-.excel { 
+.excel {
   position: relative;
-  color: #888; 
-  height: 100%; 
-  max-width: 100%; 
+  color: #888;
+  height: 100%;
+  max-width: 100%;
   font-size: .8rem;
 }
